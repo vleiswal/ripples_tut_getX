@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_tut_4/screens/home_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'Dialog',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Bottom Sheet'),
+          title: Text('Navigation'),
         ),
         body: Center(
           child: Column(
@@ -20,9 +21,10 @@ class MyApp extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               RaisedButton(
-                child: Text('Bottom Sheet'),
+                child: Text('Go to Home Screen'),
                 onPressed: () {
-                  showBottomSheet(); //BottomSheet
+                  //showBottomSheet(); //BottomSheet
+                  routeNavigation();
                 },
               ),
             ],
@@ -68,5 +70,10 @@ class MyApp extends StatelessWidget {
       ),
       enableDrag: false,
     ));
+  }
+
+  routeNavigation() async {
+    var data = await Get.to(HomeScreen(), arguments: 'qazwsx456');
+    print('Info from Home Sreen: $data');
   }
 }
