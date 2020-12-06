@@ -3,23 +3,22 @@ import 'package:get/get.dart';
 import 'package:getx_tut_4/screens/home_screen.dart';
 import 'package:getx_tut_4/screens/next_screen.dart';
 import 'package:getx_tut_4/screens/unknown_route.dart';
+import 'package:getx_tut_4/usr/student.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  var count = 0.obs;
+  //var student = Student();
 
-  void increment() {
-    count++;
-  }
+  final student = Student(name: 'Vleiskop', age: 57).obs;
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'State Management',
-      initialRoute: '/',
+      //initialRoute: '/',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
@@ -31,13 +30,17 @@ class MyApp extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Obx(
-                () => Text('Count Value is: $count',
+                () => Text('The student is ${student.value.name}',
                     style: TextStyle(fontSize: 25)),
               ),
               SizedBox(height: 10),
               RaisedButton(
-                child: Text('Increment'),
-                onPressed: () => increment(),
+                child: Text('To Upper Case'),
+                onPressed: () {
+                  student.update((student) {
+                    student.name = student.name.toString().toUpperCase();
+                  });
+                },
               ),
             ],
           ),
