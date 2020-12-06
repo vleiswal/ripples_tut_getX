@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_tut_4/screens/home_screen.dart';
+import 'package:getx_tut_4/screens/next_screen.dart';
+import 'package:getx_tut_4/screens/unknown_route.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,7 +12,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Dialog',
+      title: 'Navigation',
+      initialRoute: '/',
+      debugShowCheckedModeBanner: false,
+      defaultTransition: Transition.zoom,
+      getPages: [
+        GetPage(name: '/', page: () => MyApp()),
+        GetPage(name: '/home', page: () => HomeScreen()),
+        // GetPage(
+        //   name: '/nextScreen',
+        //   page: () => NextScreen(),
+        //   transition: Transition.leftToRight,
+        // ),
+        GetPage(
+          name: '/nextScreen/:someValue',
+          page: () => NextScreen(),
+          transition: Transition.leftToRight,
+        ),
+      ],
+      unknownRoute: GetPage(
+        name: '/notfound',
+        page: () => UnknownRoute(),
+      ),
       home: Scaffold(
         appBar: AppBar(
           title: Text('Navigation'),
@@ -23,8 +46,12 @@ class MyApp extends StatelessWidget {
               RaisedButton(
                 child: Text('Go to Home Screen'),
                 onPressed: () {
+                  Get.toNamed('/homex');
+                  // Get.toNamed(
+                  //   '/home?channel=VleisWa&content=Flutter GetX',
+                  // );
                   //showBottomSheet(); //BottomSheet
-                  routeNavigation();
+                  //routeNavigation();
                 },
               ),
             ],
@@ -33,6 +60,34 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return GetMaterialApp(
+//       title: 'Dialog',
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: Text('Navigation'),
+//         ),
+//         body: Center(
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children: [
+//               RaisedButton(
+//                 child: Text('Go to Home Screen'),
+//                 onPressed: () {
+//                   //showBottomSheet(); //BottomSheet
+//                   routeNavigation();
+//                 },
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
 
   showBottomSheet() {
     return (Get.bottomSheet(

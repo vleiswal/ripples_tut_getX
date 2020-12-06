@@ -23,7 +23,10 @@ class HomeScreen extends StatelessWidget {
                 'Next Screen',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              onPressed: () {},
+              onPressed: () {
+                //Get.toNamed('/nextScreen');
+                Get.toNamed('/nextScreen/1234');
+              },
             ),
             SizedBox(height: 10),
             RaisedButton(
@@ -37,7 +40,9 @@ class HomeScreen extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Container(
-              child: Text('The data from Main is: ${Get.arguments}'),
+              child: Text(
+                'The channel is ${Get.parameters['channel']} and the content is ${Get.parameters['content']}',
+              ),
             ),
           ],
         ),
