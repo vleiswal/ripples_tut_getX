@@ -9,50 +9,35 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  var count = 0.obs;
+
+  void increment() {
+    count++;
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Navigation',
+      title: 'State Management',
       initialRoute: '/',
       debugShowCheckedModeBanner: false,
-      defaultTransition: Transition.zoom,
-      getPages: [
-        GetPage(name: '/', page: () => MyApp()),
-        GetPage(name: '/home', page: () => HomeScreen()),
-        // GetPage(
-        //   name: '/nextScreen',
-        //   page: () => NextScreen(),
-        //   transition: Transition.leftToRight,
-        // ),
-        GetPage(
-          name: '/nextScreen/:someValue',
-          page: () => NextScreen(),
-          transition: Transition.leftToRight,
-        ),
-      ],
-      unknownRoute: GetPage(
-        name: '/notfound',
-        page: () => UnknownRoute(),
-      ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Navigation'),
+          title: Text('State Management'),
         ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Obx(
+                () => Text('Count Value is: $count',
+                    style: TextStyle(fontSize: 25)),
+              ),
+              SizedBox(height: 10),
               RaisedButton(
-                child: Text('Go to Home Screen'),
-                onPressed: () {
-                  Get.toNamed('/homex');
-                  // Get.toNamed(
-                  //   '/home?channel=VleisWa&content=Flutter GetX',
-                  // );
-                  //showBottomSheet(); //BottomSheet
-                  //routeNavigation();
-                },
+                child: Text('Increment'),
+                onPressed: () => increment(),
               ),
             ],
           ),
@@ -60,6 +45,59 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return GetMaterialApp(
+//       title: 'Navigation',
+//       initialRoute: '/',
+//       debugShowCheckedModeBanner: false,
+//       defaultTransition: Transition.zoom,
+//       getPages: [
+//         GetPage(name: '/', page: () => MyApp()),
+//         GetPage(name: '/home', page: () => HomeScreen()),
+//         // GetPage(
+//         //   name: '/nextScreen',
+//         //   page: () => NextScreen(),
+//         //   transition: Transition.leftToRight,
+//         // ),
+//         GetPage(
+//           name: '/nextScreen/:someValue',
+//           page: () => NextScreen(),
+//           transition: Transition.leftToRight,
+//         ),
+//       ],
+//       unknownRoute: GetPage(
+//         name: '/notfound',
+//         page: () => UnknownRoute(),
+//       ),
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: Text('Navigation'),
+//         ),
+//         body: Center(
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children: [
+//               RaisedButton(
+//                 child: Text('Go to Home Screen'),
+//                 onPressed: () {
+//                   Get.toNamed('/homex');
+//                   // Get.toNamed(
+//                   //   '/home?channel=VleisWa&content=Flutter GetX',
+//                   // );
+//                   //showBottomSheet(); //BottomSheet
+//                   //routeNavigation();
+//                 },
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
 
 // class MyApp extends StatelessWidget {
 //   @override
