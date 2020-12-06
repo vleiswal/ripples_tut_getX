@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_tut_4/controllers/my_controller.dart';
 import 'package:getx_tut_4/screens/home_screen.dart';
 import 'package:getx_tut_4/screens/next_screen.dart';
 import 'package:getx_tut_4/screens/unknown_route.dart';
@@ -12,7 +13,9 @@ void main() {
 class MyApp extends StatelessWidget {
   //var student = Student();
 
-  final student = Student(name: 'Vleiskop', age: 57).obs;
+  // final student = Student(name: 'Vleiskop', age: 57).obs;
+  //Create Controller
+  MyController myController = Get.put(MyController());
 
   @override
   Widget build(BuildContext context) {
@@ -30,18 +33,21 @@ class MyApp extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Obx(
-                () => Text('The student is ${student.value.name}',
+                () => Text('The student is: ${myController.student.value.name}',
                     style: TextStyle(fontSize: 25)),
               ),
               SizedBox(height: 10),
               RaisedButton(
-                child: Text('To Upper Case'),
-                onPressed: () {
-                  student.update((student) {
-                    student.name = student.name.toString().toUpperCase();
-                  });
-                },
-              ),
+                  child: Text('To Upper Case'),
+                  onPressed: () {
+                    myController.convertToUpperCase();
+                  }),
+              SizedBox(height: 10),
+              RaisedButton(
+                  child: Text('To Lower Case'),
+                  onPressed: () {
+                    myController.convertToLowerCase();
+                  }),
             ],
           ),
         ),
