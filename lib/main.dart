@@ -12,7 +12,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   //Create Controller
-  MyController myController = Get.put(MyController());
+  //MyController myController = Get.put(MyController());
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +29,11 @@ class MyApp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              GetX<MyController>(
-                //init: MyController(),
+              GetBuilder<MyController>(
+                init: MyController(),
                 builder: (controller) {
                   return Text(
-                    'The value is: ${myController.count}',
+                    'The value is: ${controller.count}',
                     style: TextStyle(fontSize: 25),
                   );
                 },
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
               RaisedButton(
                   child: Text('Increment Counter'),
                   onPressed: () {
-                    myController.increment();
+                    Get.find<MyController>().increment();
                   }),
             ],
           ),

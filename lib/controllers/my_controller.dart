@@ -5,10 +5,11 @@ import 'package:getx_tut_4/usr/student.dart';
 import 'package:get/get.dart';
 
 class MyController extends GetxController {
-  var count = 0.obs;
+  var count = 0;
 
   void increment() {
     count++;
+    update();
   }
   // var student = Student(name: 'Vleis', age: 55).obs;
 
