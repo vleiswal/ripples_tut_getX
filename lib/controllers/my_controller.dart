@@ -7,10 +7,9 @@ import 'package:get/get.dart';
 class MyController extends GetxController {
   var count = 0;
 
-  void increment() async {
-    await Future<int>.delayed(Duration(seconds: 2));
-    this.count++;
-    update();
+  void increment() {
+    count++;
+    update(['txCount']);
   }
 
   void cleanUpTask() {
