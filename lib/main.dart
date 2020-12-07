@@ -12,17 +12,17 @@ void main() {
 
 class MyApp extends StatelessWidget {
   //Create Controller
-  //MyController myController = Get.put(MyController());
+  MyController myController = Get.put(MyController());
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'State Management',
+      title: 'Controller Lifecycle',
       //initialRoute: '/',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('State Management'),
+          title: Text('Controller Lifecycle'),
         ),
         body: Center(
           child: Column(
@@ -30,7 +30,8 @@ class MyApp extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               GetBuilder<MyController>(
-                init: MyController(),
+                // initState: (data) => myController.increment(),
+                // dispose: (_) => myController.cleanUpTask(),
                 builder: (controller) {
                   return Text(
                     'The value is: ${controller.count}',
@@ -39,11 +40,11 @@ class MyApp extends StatelessWidget {
                 },
               ),
               SizedBox(height: 10),
-              RaisedButton(
-                  child: Text('Increment Counter'),
-                  onPressed: () {
-                    Get.find<MyController>().increment();
-                  }),
+              // RaisedButton(
+              //     child: Text('Increment Counter'),
+              //     onPressed: () {
+              //       Get.find<MyController>().increment();
+              //     }),
             ],
           ),
         ),
