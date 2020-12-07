@@ -11,9 +11,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  //var student = Student();
-
-  // final student = Student(name: 'Vleiskop', age: 57).obs;
   //Create Controller
   MyController myController = Get.put(MyController());
 
@@ -32,21 +29,20 @@ class MyApp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Obx(
-                () => Text('The student is: ${myController.student.value.name}',
-                    style: TextStyle(fontSize: 25)),
+              GetX<MyController>(
+                //init: MyController(),
+                builder: (controller) {
+                  return Text(
+                    'The value is: ${myController.count}',
+                    style: TextStyle(fontSize: 25),
+                  );
+                },
               ),
               SizedBox(height: 10),
               RaisedButton(
-                  child: Text('To Upper Case'),
+                  child: Text('Increment Counter'),
                   onPressed: () {
-                    myController.convertToUpperCase();
-                  }),
-              SizedBox(height: 10),
-              RaisedButton(
-                  child: Text('To Lower Case'),
-                  onPressed: () {
-                    myController.convertToLowerCase();
+                    myController.increment();
                   }),
             ],
           ),
@@ -54,6 +50,51 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+
+// class MyApp extends StatelessWidget {
+//   //var student = Student();
+
+//   // final student = Student(name: 'Vleiskop', age: 57).obs;
+//   //Create Controller
+//   MyController myController = Get.put(MyController());
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return GetMaterialApp(
+//       title: 'State Management',
+//       //initialRoute: '/',
+//       debugShowCheckedModeBanner: false,
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: Text('State Management'),
+//         ),
+//         body: Center(
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children: [
+//               Obx(
+//                 () => Text('The student is: ${myController.student.value.name}',
+//                     style: TextStyle(fontSize: 25)),
+//               ),
+//               SizedBox(height: 10),
+//               RaisedButton(
+//                   child: Text('To Upper Case'),
+//                   onPressed: () {
+//                     myController.convertToUpperCase();
+//                   }),
+//               SizedBox(height: 10),
+//               RaisedButton(
+//                   child: Text('To Lower Case'),
+//                   onPressed: () {
+//                     myController.convertToLowerCase();
+//                   }),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
 
 // class MyApp extends StatelessWidget {
 //   @override
