@@ -5,21 +5,37 @@ import 'package:getx_tut_4/usr/student.dart';
 import 'package:get/get.dart';
 
 class MyController extends GetxController {
-  var count = 0;
+  var count = 0.obs;
 
   void increment() {
     count++;
-    update(['txCount']);
-  }
-
-  void cleanUpTask() {
-    print('CleanUp Task');
+    //update(['txCount']);
   }
 
   @override
   void onInit() {
-    print('Init Called');
+    // called every time the variable count is changed
+    // ever(count, (_) => print(count));
+
+    //called every time the value of any variable in a List is changed
+    //everAll([count], (_) => print(count));
+
+    // called only once when variable changes
+    once(count, (_) => print(count));
+
+    // called every time the user stop typing for 1 sec
+    debounce(count, (_) => print('When user stop typing for 1 sec'),
+        time: Duration(seconds: 1));
+
+    // Ignore all changes for a set time
+    interval(count, (_) => print('Ignore all changes for x time'),
+        time: Duration(seconds: 3));
+
     super.onInit();
+  }
+
+  void cleanUpTask() {
+    print('CleanUp Task');
   }
 
   @override

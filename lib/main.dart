@@ -17,52 +17,91 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Unique ID',
+      title: 'Workers',
       //initialRoute: '/',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Unique ID'),
+          title: Text('Workers'),
         ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              GetBuilder<MyController>(
-                // initState: (data) => myController.increment(),
-                // dispose: (_) => myController.cleanUpTask(),
-                id: 'txCount',
-                builder: (controller) {
-                  return Text(
-                    'The value is: ${controller.count}',
-                    style: TextStyle(fontSize: 25),
-                  );
-                },
-              ),
-              GetBuilder<MyController>(
-                // initState: (data) => myController.increment(),
-                // dispose: (_) => myController.cleanUpTask(),
-
-                builder: (controller) {
-                  return Text(
-                    'The value is..: ${controller.count}',
-                    style: TextStyle(fontSize: 25),
-                  );
-                },
-              ),
               SizedBox(height: 10),
               RaisedButton(
-                  child: Text('Increment Counter'),
-                  onPressed: () {
+                child: Text('Increment Counter'),
+                onPressed: () => myController.increment(),
+              ),
+              Padding(
+                padding: EdgeInsets.all(16),
+                child: TextField(
+                  onChanged: (val) {
                     myController.increment();
-                  }),
+                  },
+                ),
+              )
             ],
           ),
         ),
       ),
     );
   }
+
+// class MyApp extends StatelessWidget {
+//   //Create Controller
+//   MyController myController = Get.put(MyController());
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return GetMaterialApp(
+  //     title: 'Lesson 13',
+  //     //initialRoute: '/',
+  //     debugShowCheckedModeBanner: false,
+  //     home: Scaffold(
+  //       appBar: AppBar(
+  //         title: Text('Lesson 13'),
+  //       ),
+  //       body: Center(
+  //         child: Column(
+  //           mainAxisAlignment: MainAxisAlignment.center,
+  //           crossAxisAlignment: CrossAxisAlignment.center,
+  //           children: [
+  //             GetBuilder<MyController>(
+  //               // initState: (data) => myController.increment(),
+  //               // dispose: (_) => myController.cleanUpTask(),
+  //               id: 'txCount',
+  //               builder: (controller) {
+  //                 return Text(
+  //                   'The value is: ${controller.count}',
+  //                   style: TextStyle(fontSize: 25),
+  //                 );
+  //               },
+  //             ),
+  //             GetBuilder<MyController>(
+  //               // initState: (data) => myController.increment(),
+  //               // dispose: (_) => myController.cleanUpTask(),
+
+  //               builder: (controller) {
+  //                 return Text(
+  //                   'The value is..: ${controller.count}',
+  //                   style: TextStyle(fontSize: 25),
+  //                 );
+  //               },
+  //             ),
+  //             SizedBox(height: 10),
+  //             RaisedButton(
+  //                 child: Text('Increment Counter'),
+  //                 onPressed: () {
+  //                   myController.increment();
+  //                 }),
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
 // class MyApp extends StatelessWidget {
 //   //var student = Student();
