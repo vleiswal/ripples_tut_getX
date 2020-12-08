@@ -4,6 +4,7 @@ import 'package:getx_tut_4/controllers/my_controller.dart';
 import 'package:getx_tut_4/screens/home_screen.dart';
 import 'package:getx_tut_4/screens/next_screen.dart';
 import 'package:getx_tut_4/screens/unknown_route.dart';
+import 'package:getx_tut_4/usr/messages.dart';
 import 'package:getx_tut_4/usr/student.dart';
 
 void main() {
@@ -17,37 +18,92 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Workers',
-      //initialRoute: '/',
+      title: 'Translations',
+      translations: Messages(),
+      locale: Locale('en', 'US'),
+      fallbackLocale: Locale('en', 'US'),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Workers'),
+          title: Text('Internationalizations'),
         ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Text(
+                'hello'.tr,
+                style: TextStyle(fontSize: 25, color: Colors.blueAccent),
+              ),
               SizedBox(height: 10),
               RaisedButton(
-                child: Text('Increment Counter'),
-                onPressed: () => myController.increment(),
+                child: Text('Afr'),
+                onPressed: () => myController.changeLanguage('af', 'ZA'),
               ),
-              Padding(
-                padding: EdgeInsets.all(16),
-                child: TextField(
-                  onChanged: (val) {
-                    myController.increment();
-                  },
-                ),
-              )
+              SizedBox(height: 10),
+              RaisedButton(
+                child: Text('English'),
+                onPressed: () => myController.changeLanguage('us', 'US'),
+              ),
+              SizedBox(height: 10),
+              RaisedButton(
+                child: Text('French'),
+                onPressed: () => myController.changeLanguage('fr', 'FR'),
+              ),
+              // Padding(
+              //   padding: EdgeInsets.all(16),
+              //   child: TextField(
+              //     onChanged: (val) {
+              //       myController.increment();
+              //     },
+              //   ),
+              // )
             ],
           ),
         ),
       ),
     );
   }
+
+// class MyApp extends StatelessWidget {
+//   //Create Controller
+//   MyController myController = Get.put(MyController());
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return GetMaterialApp(
+//       title: 'Workers',
+//       //initialRoute: '/',
+//       debugShowCheckedModeBanner: false,
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: Text('Workers'),
+//         ),
+//         body: Center(
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children: [
+//               SizedBox(height: 10),
+//               RaisedButton(
+//                 child: Text('Increment Counter'),
+//                 onPressed: () => myController.increment(),
+//               ),
+//               Padding(
+//                 padding: EdgeInsets.all(16),
+//                 child: TextField(
+//                   onChanged: (val) {
+//                     myController.increment();
+//                   },
+//                 ),
+//               )
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
 
 // class MyApp extends StatelessWidget {
 //   //Create Controller

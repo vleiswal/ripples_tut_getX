@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:ui';
 
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:getx_tut_4/usr/student.dart';
@@ -7,10 +8,15 @@ import 'package:get/get.dart';
 class MyController extends GetxController {
   var count = 0.obs;
 
-  void increment() {
-    count++;
-    //update(['txCount']);
+  void changeLanguage(var langCode, var countryCode) {
+    var locale = Locale(langCode, countryCode);
+    Get.updateLocale(locale);
   }
+
+  // void increment() {
+  //   count++;
+  //   //update(['txCount']);
+  // }
 
   @override
   void onInit() {
@@ -21,15 +27,15 @@ class MyController extends GetxController {
     //everAll([count], (_) => print(count));
 
     // called only once when variable changes
-    once(count, (_) => print(count));
+    //once(count, (_) => print(count));
 
     // called every time the user stop typing for 1 sec
-    debounce(count, (_) => print('When user stop typing for 1 sec'),
-        time: Duration(seconds: 1));
+    //debounce(count, (_) => print('When user stop typing for 1 sec'),
+    //    time: Duration(seconds: 1));
 
     // Ignore all changes for a set time
-    interval(count, (_) => print('Ignore all changes for x time'),
-        time: Duration(seconds: 3));
+    // interval(count, (_) => print('Ignore all changes for x time'),
+    //    time: Duration(seconds: 3));
 
     super.onInit();
   }
