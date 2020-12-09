@@ -4,14 +4,22 @@ import 'dart:ui';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:getx_tut_4/usr/student.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyController extends GetxController {
-  var count = 0.obs;
-
-  void changeLanguage(var langCode, var countryCode) {
-    var locale = Locale(langCode, countryCode);
-    Get.updateLocale(locale);
+  void incrementCounter() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int counter = (prefs.getInt('counter') ?? 0) + 1;
+    print('Pressed $counter times...');
+    await prefs.setInt('counter', counter);
   }
+
+  //var count = 0.obs;
+
+  // void changeLanguage(var langCode, var countryCode) {
+  //   var locale = Locale(langCode, countryCode);
+  //   Get.updateLocale(locale);
+  // }
 
   // void increment() {
   //   count++;

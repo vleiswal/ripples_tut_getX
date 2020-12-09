@@ -12,59 +12,100 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  //Create Controller
-  MyController myController = Get.put(MyController());
-
   @override
   Widget build(BuildContext context) {
+//Create Controller
+    // final MyController myController =
+    //     Get.put(MyController(), tag: 'instance1', permanent: true);
+
+    //Get.lazyPut(() => MyController());
+
+    //Get.create<MyController>(() => MyController());
+
+    Get.putAsync<MyController>(() async => MyController());
+
     return GetMaterialApp(
-      title: 'Translations',
-      translations: Messages(),
-      locale: Locale('en', 'US'),
-      fallbackLocale: Locale('en', 'US'),
+      title: 'Dependancy Inject',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Internationalizations'),
+          title: Text('Dependancy Inject'),
         ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                'hello'.tr,
-                style: TextStyle(fontSize: 25, color: Colors.blueAccent),
-              ),
-              SizedBox(height: 10),
               RaisedButton(
                 child: Text('Afr'),
-                onPressed: () => myController.changeLanguage('af', 'ZA'),
+                onPressed: () {
+                  //Get.find<MyController>();
+                  Get.find<MyController>().incrementCounter();
+                },
               ),
               SizedBox(height: 10),
-              RaisedButton(
-                child: Text('English'),
-                onPressed: () => myController.changeLanguage('us', 'US'),
-              ),
-              SizedBox(height: 10),
-              RaisedButton(
-                child: Text('French'),
-                onPressed: () => myController.changeLanguage('fr', 'FR'),
-              ),
-              // Padding(
-              //   padding: EdgeInsets.all(16),
-              //   child: TextField(
-              //     onChanged: (val) {
-              //       myController.increment();
-              //     },
-              //   ),
-              // )
             ],
           ),
         ),
       ),
     );
   }
+
+// class MyApp extends StatelessWidget {
+//   //Create Controller
+//   MyController myController =
+//       Get.put(MyController(), tag: 'instance1', permanent: true);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return GetMaterialApp(
+//       title: 'Translations',
+//       translations: Messages(),
+//       locale: Locale('en', 'US'),
+//       fallbackLocale: Locale('en', 'US'),
+//       debugShowCheckedModeBanner: false,
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: Text('Internationalizations'),
+//         ),
+//         body: Center(
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children: [
+//               Text(
+//                 'hello'.tr,
+//                 style: TextStyle(fontSize: 25, color: Colors.blueAccent),
+//               ),
+//               SizedBox(height: 10),
+//               RaisedButton(
+//                 child: Text('Afr'),
+//                 onPressed: () => myController.changeLanguage('af', 'ZA'),
+//               ),
+//               SizedBox(height: 10),
+//               RaisedButton(
+//                 child: Text('English'),
+//                 onPressed: () => myController.changeLanguage('us', 'US'),
+//               ),
+//               SizedBox(height: 10),
+//               RaisedButton(
+//                 child: Text('French'),
+//                 onPressed: () => myController.changeLanguage('fr', 'FR'),
+//               ),
+//               // Padding(
+//               //   padding: EdgeInsets.all(16),
+//               //   child: TextField(
+//               //     onChanged: (val) {
+//               //       myController.increment();
+//               //     },
+//               //   ),
+//               // )
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
 
 // class MyApp extends StatelessWidget {
 //   //Create Controller
