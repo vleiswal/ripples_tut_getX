@@ -1,35 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_tut_4/controllers/my_controller.dart';
+import 'package:getx_tut_4/controllers/service.dart';
 import 'package:getx_tut_4/screens/home_screen.dart';
 import 'package:getx_tut_4/screens/next_screen.dart';
 import 'package:getx_tut_4/screens/unknown_route.dart';
 import 'package:getx_tut_4/usr/messages.dart';
 import 'package:getx_tut_4/usr/student.dart';
 
-void main() {
+Future<void> main() async {
+  await initServices();
   runApp(MyApp());
+}
+
+Future<void> initServices() async {
+  print('Starting Services....');
+  await Get.putAsync<Service>(() async => Service());
+  print('All services started....');
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-//Create Controller
-    // final MyController myController =
-    //     Get.put(MyController(), tag: 'instance1', permanent: true);
-
-    //Get.lazyPut(() => MyController());
-
-    //Get.create<MyController>(() => MyController());
-
-    Get.putAsync<MyController>(() async => MyController());
-
     return GetMaterialApp(
-      title: 'Dependancy Inject',
+      title: 'GetX Service',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Dependancy Inject'),
+          title: Text('GetX Service'),
         ),
         body: Center(
           child: Column(
@@ -37,10 +35,9 @@ class MyApp extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               RaisedButton(
-                child: Text('Afr'),
+                child: Text('Increment'),
                 onPressed: () {
-                  //Get.find<MyController>();
-                  Get.find<MyController>().incrementCounter();
+                  Get.find<Service>().incrementCounter();
                 },
               ),
               SizedBox(height: 10),
@@ -50,6 +47,46 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+// //Create Controller
+//     // final MyController myController =
+//     //     Get.put(MyController(), tag: 'instance1', permanent: true);
+
+//     //Get.lazyPut(() => MyController());
+
+//     //Get.create<MyController>(() => MyController());
+
+//     Get.putAsync<MyController>(() async => MyController());
+
+//     return GetMaterialApp(
+//       title: 'Dependancy Inject',
+//       debugShowCheckedModeBanner: false,
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: Text('Dependancy Inject'),
+//         ),
+//         body: Center(
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children: [
+//               RaisedButton(
+//                 child: Text('Afr'),
+//                 onPressed: () {
+//                   //Get.find<MyController>();
+//                   Get.find<MyController>().incrementCounter();
+//                 },
+//               ),
+//               SizedBox(height: 10),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
 
 // class MyApp extends StatelessWidget {
 //   //Create Controller
