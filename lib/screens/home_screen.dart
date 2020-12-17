@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_tut_4/controllers/home_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -13,19 +14,20 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'This is the Home Screen',
-              style: TextStyle(color: Colors.blue, fontSize: 30),
+            Obx(
+              () => Text(
+                'The value is ${Get.find<HomeController>().count}',
+                style: TextStyle(color: Colors.blue, fontSize: 25),
+              ),
             ),
             SizedBox(height: 10),
             RaisedButton(
               child: Text(
-                'Next Screen',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                'Increment',
               ),
               onPressed: () {
                 //Get.toNamed('/nextScreen');
-                Get.toNamed('/nextScreen/1234');
+                Get.find<HomeController>().increment();
               },
             ),
             SizedBox(height: 10),
@@ -35,15 +37,15 @@ class HomeScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               onPressed: () {
-                Get.back(result: 'From the Home Screen');
+                Get.back();
               },
             ),
             SizedBox(height: 10),
-            Container(
-              child: Text(
-                'The channel is ${Get.parameters['channel']} and the content is ${Get.parameters['content']}',
-              ),
-            ),
+            // Container(
+            //   child: Text(
+            //     'The channel is ${Get.parameters['channel']} and the content is ${Get.parameters['content']}',
+            //   ),
+            // ),
           ],
         ),
       ),

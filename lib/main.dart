@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_tut_4/controllers/all_controller_binding.dart';
+import 'package:getx_tut_4/controllers/home_controller.dart';
+import 'package:getx_tut_4/controllers/home_controller_binding.dart';
 import 'package:getx_tut_4/controllers/my_controller.dart';
 import 'package:getx_tut_4/controllers/service.dart';
 import 'package:getx_tut_4/screens/home_screen.dart';
@@ -8,39 +11,72 @@ import 'package:getx_tut_4/screens/unknown_route.dart';
 import 'package:getx_tut_4/usr/messages.dart';
 import 'package:getx_tut_4/usr/student.dart';
 
+import 'controllers/myapp_controller_binding.dart';
+
 Future<void> main() async {
-  await initServices();
+  // await initServices();
+  MyAppControllerBinding().dependencies();
   runApp(MyApp());
 }
 
-Future<void> initServices() async {
-  print('Starting Services....');
-  await Get.putAsync<Service>(() async => Service());
-  print('All services started....');
-}
+// Future<void> initServices() async {
+//   print('Starting Services....');
+//   await Get.putAsync<Service>(() async => Service());
+//   print('All services started....');
+// }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'GetX Service',
+      title: 'Binding',
       debugShowCheckedModeBanner: false,
+      //initialBinding: AllControllerBinding(),
+      // getPages: [
+      //   GetPage(
+      //       name: '/home',
+      //       page: () => HomeScreen(),
+      //       binding: HomeControllerBinding()),
+      // ],
+      getPages: [
+        GetPage(
+          name: '/home',
+          page: () => HomeScreen(),
+          binding: BindingsBuilder(
+            () => {Get.lazyPut<HomeController>(() => HomeController())},
+          ),
+        ),
+      ],
       home: Scaffold(
         appBar: AppBar(
-          title: Text('GetX Service'),
+          title: Text('Binding'),
         ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Obx(
+                () => Text(
+                  'The value is ${Get.find<MyController>().count}',
+                  style: TextStyle(fontSize: 25),
+                ),
+              ),
+              SizedBox(height: 10),
               RaisedButton(
                 child: Text('Increment'),
                 onPressed: () {
-                  Get.find<Service>().incrementCounter();
+                  Get.find<MyController>().increment();
                 },
               ),
               SizedBox(height: 10),
+              RaisedButton(
+                child: Text('Home'),
+                onPressed: () {
+                  Get.toNamed('/home');
+                  //Get.to(HomeScreen());
+                },
+              ),
             ],
           ),
         ),
